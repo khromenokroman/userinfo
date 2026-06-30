@@ -11,24 +11,6 @@
 | GCC / Clang | с поддержкой C++20 |
 | Linux | `/var/log/lastlog` должен существовать |
 
-## Структура проекта
-
-```
-├── CMakeLists.txt
-├── cmake/
-│   └── userinfoConfig.cmake.in
-└── src/
-    ├── lib/                         — библиотека
-    │   ├── CMakeLists.txt
-    │   ├── include/
-    │   │   └── userinfo/
-    │   │       └── userinfo.hpp
-    │   └── userinfo.cpp
-    └── app/                         — пример использования
-        ├── CMakeLists.txt
-        └── main.cpp
-```
-
 ## Сборка
 
 ### Только библиотека
@@ -153,28 +135,3 @@ find_package(userinfo REQUIRED)
 target_link_libraries(my_target PRIVATE userinfo::userinfo)
 ```
 
-## Пример
-
-```cpp
-#include <userinfo/userinfo.hpp>
-#include <ctime>
-#include <iostream>
-
-int main() {
-    auto user = userinfo::current_user();
-    std::cout << "Пользователь: " << user.m_name
-              << "  uid=" << user.m_uid << "\n";
-
-    if (auto term = userinfo::current_terminal())
-        std::cout << "Терминал: " << term->m_full_name << "\n";
-
-    if (auto login = userinfo::last_login()) {
-        char buf[32];
-        std::tm* tm = std::localtime(&login->m_time);
-        std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", tm);
-        std::cout << "Последний вход: "
-                  << (login->m_host.empty() ? "локально" : login->m_host)
-                  << " в " << buf << "\n";
-    }
-}
-```
