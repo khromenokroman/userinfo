@@ -1,0 +1,21 @@
+# Сборка
+build/
+cmake-build-*/
+
+# Установка
+install/
+
+# CLion
+.idea/
+
+# clangd
+.cache/
+compile_commands.json
+
+# Claude Code
+CLAUDE.md
+
+# Временные файлы редакторов
+*.swp
+*.swo
+*~
