@@ -19,11 +19,11 @@ CurrentUser current_user() {
         throw std::runtime_error("getpwuid failed for uid " + std::to_string(uid));
     return CurrentUser{
         .m_name         = pw->pw_name,
-        .m_uid          = pw->pw_uid,
-        .m_gid          = pw->pw_gid,
         .m_home         = pw->pw_dir,
         .m_shell        = pw->pw_shell,
         .m_display_name = pw->pw_gecos,
+        .m_uid          = pw->pw_uid,
+        .m_gid          = pw->pw_gid,
     };
 }
 
@@ -73,8 +73,8 @@ std::optional<LastLogin> last_login() {
 
     return LastLogin{
         .m_host     = std::string(ll.ll_host, strnlen(ll.ll_host, sizeof(ll.ll_host))),
-        .m_time     = static_cast<std::time_t>(ll.ll_time),
         .m_terminal = std::string(ll.ll_line, strnlen(ll.ll_line, sizeof(ll.ll_line))),
+        .m_time     = static_cast<std::time_t>(ll.ll_time),
     };
 }
 

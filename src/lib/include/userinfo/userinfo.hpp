@@ -13,11 +13,11 @@ namespace userinfo {
 /// @brief Информация о текущем пользователе системы.
 struct CurrentUser {
     std::string m_name;         ///< Логин пользователя.
-    uid_t       m_uid;          ///< Идентификатор пользователя (UID).
-    gid_t       m_gid;          ///< Идентификатор группы (GID).
     std::string m_home;         ///< Путь к домашнему каталогу.
     std::string m_shell;        ///< Путь к командной оболочке.
     std::string m_display_name; ///< Полное имя из поля gecos.
+    uid_t       m_uid;          ///< Идентификатор пользователя (UID).
+    gid_t       m_gid;          ///< Идентификатор группы (GID).
 };
 
 /// @brief Информация о терминале, связанном с процессом.
@@ -30,8 +30,8 @@ struct Terminal {
 /// @brief Данные о последнем входе пользователя в систему.
 struct LastLogin {
     std::string m_host;     ///< IP-адрес или имя хоста. Пустая строка означает локальный вход.
-    std::time_t m_time;     ///< Время входа в формате Unix timestamp.
     std::string m_terminal; ///< Имя терминала, с которого выполнялся вход.
+    std::time_t m_time;     ///< Время входа в формате Unix timestamp.
 };
 
 /// @brief Возвращает информацию о текущем пользователе.
